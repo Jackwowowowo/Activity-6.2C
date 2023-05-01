@@ -39,13 +39,13 @@ pipeline {
                     mail to: "jackboakes98@gmail.com",
                     subject: "Security Scan Success",
                     body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully",
-                    attachLog: True
+                    emailext attachLog: True
                 }
                 failure {
                     mail to: "jackboakes98@gmail.com",
                     subject: "Security Scan Failure",
                     body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has failed",
-                    attachLog: True
+                    emailext attachLog: True
                 }
             }
         }
