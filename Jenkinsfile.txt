@@ -38,10 +38,8 @@ pipeline {
                 success {
                     mail to: "jackboakes98@gmail.com",
                     subject: "Security Scan Success",
-                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully or unsuccesfully"
+                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully"
                 }
-            }
-            post {
                 failure {
                     mail to: "jackboakes98@gmail.com",
                     subject: "Security Scan Failure",
