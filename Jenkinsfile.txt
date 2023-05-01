@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+    environment {
+        DIRECTORY_PATH = "C:/Users/Jack/Documents/GitHub/Activity-6.2C"
+        TESTING_ENVIRONMENT = "Unit Testing"
+        PRODUCTION_ENVIRONMENT = "Jack Boakes"
+
+    }
+    stages {
+        stage('Build') {
+            steps {
+                // Build the code using a build automation tool to compile and package 
+                // your code. You need to specify at least one build automation tool e.g., Maven
+            }
+        }
+        stage('Unit and Integration Tests') {
+            steps {
+                //  run unit tests to ensure the code functions as
+                // expected and run integration tests to ensure the different components of the
+                // application work together as expected. You need to specify test automation tools for
+                // this stage.
+                echo "Unit tests completed"
+                echo "Integration tests completed"
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo "Check the quality of the code"
+            }
+        }  
+        stage('Security Scan') {
+            steps {
+                // find tool for security scan
+                echo ""
+            }
+            post {
+                success {
+                    mail to: "jackboakes98@gmail.com",
+                    subject: "Security Scan Success",
+                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully or unsuccesfully"
+                }
+            post {
+                failure {
+                    mail to: "jackboakes98@gmail.com",
+                    subject: "Security Scan Failure",
+                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has failed"
+                }
+            }
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo "Approval Started"
+                sleep 10
+                echo "Approval Completed"
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Approval Started"
+                echo "Approval Completed"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploy ${PRODUCTION_ENVIRONMENT} to production has been completed."
+            }
+        }
+    }
+}
