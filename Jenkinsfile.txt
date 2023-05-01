@@ -36,19 +36,21 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "jackboakes98@gmail.com",
-                    subject: "Security Scan Success",
-                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully. Build log is attached.",
-                    attachLog: true
-                    
+                    emailext attachLog: true,
+                        to: "jackboakes98@gmail.com",
+                        subject: "Security Scan Success",
+                        body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully",
+                        mimeType: 'text/plain'
                 }
                 failure {
-                    mail to: "jackboakes98@gmail.com",
-                    subject: "Security Scan Failure",
-                    body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has failed. Build log is attached.",
-                    attachLog: true
+                    emailext attachLog: true,
+                        to: "jackboakes98@gmail.com",
+                        subject: "Security Scan Failure",
+                        body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has failed",
+                        mimeType: 'text/plain'
                 }
             }
+
         }
         stage('Deploy to Staging') {
             steps {
