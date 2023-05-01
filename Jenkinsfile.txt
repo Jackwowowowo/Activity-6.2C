@@ -36,15 +36,13 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachLog: true,
-                        to: "jackboakes98@gmail.com",
+                    emailext to: "jackboakes98@gmail.com",
                         subject: "Security Scan Success",
                         body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has run successfully",
                         mimeType: 'text/plain'
                 }
                 failure {
-                    emailext attachLog: true,
-                        to: "jackboakes98@gmail.com",
+                    emailext to: "jackboakes98@gmail.com",
                         subject: "Security Scan Failure",
                         body: "The Security Scan stage of ${TESTING_ENVIRONMENT} has failed",
                         mimeType: 'text/plain'
