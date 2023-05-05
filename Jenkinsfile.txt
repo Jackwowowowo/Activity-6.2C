@@ -1,38 +1,48 @@
 pipeline {
     agent any
-    environment {
-        DIRECTORY_PATH = "C:/Users/Jack/Documents/GitHub/Activity-6.2C"
-        TESTING_ENVIRONMENT = "Unit Testing"
-        PRODUCTION_ENVIRONMENT = "Jack Boakes"
-
-    }
+    
     stages {
         stage('Build') {
             steps {
-                // Build the code using a build automation tool to compile and package 
-                // your code. You need to specify at least one build automation tool e.g., Maven
-                echo "test"
+                echo "Build Automation Tool: Maven"
+                echo "The build stage involves compiling and packaging your code using Maven to create an excecutable or deployable artifact"
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                //  run unit tests to ensure the code functions as
-                // expected and run integration tests to ensure the different components of the
-                // application work together as expected. You need to specify test automation tools for
-                // this stage.
-                echo "Unit tests completed"
-                echo "Integration tests completed"
+                echo "Unit and Integration Tool: TestNG"
+                echo "The Unit and Integration Test stage involves running automated tests using TestNG to ensure the code functions as expected."
             }
+            post {
+                success {
+                    emailext to: "jackboakes98@gmail.com",
+                        subject: "Unit and Integration Test Success",
+                        body: "I'm an automated system writing to inform you of the status of the Unit and Integration Test stage for the project.
+                        
+                        Our automated testing system has detected that the Unit and Integration testing stage completed succesfully.",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                }
+                failure {
+                    emailext to: "jackboakes98@gmail.com",
+                        subject: "Unit and Integration Test Failure",
+                        body: "I'm an automated system writing to inform you of the status of the Unit and Integration Test stage for the project.
+                        
+                        Our automated testing system has detected that the Unit and Integration testing stage been unsuccesful.",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                }
         }
         stage('Code Analysis') {
             steps {
-                echo "Check the quality of the code"
+                echo "In the Code Analysis stage SonarQube is integrated to analyze the code and ensure it meets industry standards for code quality and maintainability."
+                echo "Code Analysis Tool: SonarQube"
             }
         }  
         stage('Security Scan') {
             steps {
-                // find tool for security scan
-                echo ""
+                echo "The security Scan stage involves running a security scan on the code using OWASP ZAP to identify any vulnerabilities."
+                echo "Security Scan Tool: OWASP ZAP"
             }
             post {
                 success {
@@ -54,20 +64,20 @@ pipeline {
         }
         stage('Deploy to Staging') {
             steps {
-                echo "Approval Started"
-                sleep 10
-                echo "Approval Completed"
+                echo "In the Deploy to Staging stage the application is deployed to a Amazon EC2 environment where it can be tested. "
+                echo "Deploy to Staging Tool: Amazon EC2"
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Approval Started"
-                echo "Approval Completed"
+                echo "The integreation Tests on Staging stage is where the automated integration tests are run on the staging enviromnet to ensure the application functions as expected."
+                echo "Integration Tests on Staging Tool: Selenium"
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploy ${PRODUCTION_ENVIRONMENT} to production has been completed."
+                echo "In the Deploy to Production Stage the application is deployed to a production server (Amazon EC2)"
+                echo "Deploy to Production Tool: Amazon EC2"
             }
         }
     }
