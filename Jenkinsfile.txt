@@ -18,7 +18,6 @@ pipeline {
                     emailext to: "jackboakes98@gmail.com",
                         subject: "Unit and Integration Test Success",
                         body: "I'm an automated system writing to inform you of the status of the Unit and Integration Test stage for the project.
-                        
                         Our automated testing system has detected that the Unit and Integration testing stage completed succesfully.",
                         attachLog: true,
                         mimeType: 'text/plain'
@@ -27,7 +26,6 @@ pipeline {
                     emailext to: "jackboakes98@gmail.com",
                         subject: "Unit and Integration Test Failure",
                         body: "I'm an automated system writing to inform you of the status of the Unit and Integration Test stage for the project.
-                        
                         Our automated testing system has detected that the Unit and Integration testing stage been unsuccesful.",
                         attachLog: true,
                         mimeType: 'text/plain'
